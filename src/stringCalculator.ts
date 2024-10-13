@@ -14,5 +14,13 @@ export const add = (str: string) => {
 };
 
 const stringToNumberArray = (input: string): number[] => {
-  return input.split(',').map(Number);
+  let delimiter = '';
+  if (input.includes(',')) {
+    delimiter = ',';
+  }
+
+  if (input.includes('\n')) {
+    delimiter = '\n';
+  }
+  return input.split(delimiter).map(Number);
 };
