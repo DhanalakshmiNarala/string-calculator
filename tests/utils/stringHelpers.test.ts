@@ -11,5 +11,15 @@ describe('String helpers', () => {
       const result = findDelimiter('1\n2\n3');
       expect(result).toBe('\n');
     });
+
+    it('should return ";" as delimiter', () => {
+      const result = findDelimiter('//;\n1;2');
+      expect(result).toBe(';');
+    });
+
+    it('should return "$" as delimiter', () => {
+      const result = findDelimiter('//$\n1$2');
+      expect(result).toBe('$');
+    });
   });
 });
