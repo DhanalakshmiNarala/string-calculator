@@ -1,16 +1,16 @@
+import { COMMA, NEWLINE } from '../constants/delimiters';
+
 export const findDelimiter = (str: string): string => {
-  const delimiterRegex = /^\/\/[^\d]+/;
-  if (delimiterRegex.test(str)) {
+  const customDelimiter = /^\/\/[^\d]+/;
+  if (customDelimiter.test(str)) {
     return str.charAt(2);
   }
 
-  if (str.includes(',')) {
-    return ',';
-  }
+  return findDefualtDelimiter(str);
+};
 
-  if (str.includes('\n')) {
-    return '\n';
-  }
-
+const findDefualtDelimiter = (str: string): string => {
+  if (str.includes(COMMA)) return COMMA;
+  if (str.includes(NEWLINE)) return NEWLINE;
   return '';
 };
