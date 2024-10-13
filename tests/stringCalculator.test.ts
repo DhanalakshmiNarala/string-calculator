@@ -11,4 +11,11 @@ describe('add', () => {
     expect(sumOne).toBe(1);
     expect(sumTwo).toBe(9);
   });
+
+  it('should handle number string with comma separation', () => {
+    const sumOne = add('1,5');
+    const sumTwo = add('2,9');
+    expect(sumOne).toBe(6);
+    expect(sumTwo).toBe(11);
+  });
 });
