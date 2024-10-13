@@ -39,4 +39,9 @@ describe('add', () => {
     expect(sumOne).toBe(13);
     expect(sumTwo).toBe(15);
   });
+
+  it('should handle not accept negative number strings', () => {
+    expect(() => add('1,-5,10')).toThrow('negative numbers not allowed -5');
+    expect(() => add('1,9,-10')).toThrow('negative numbers not allowed -10');
+  });
 });

@@ -11,6 +11,7 @@ export const add = (str: string) => {
   }
 
   const nums = stringToNumberArray(str);
+  validateNumsArray(nums);
   return sum(nums);
 };
 
@@ -20,4 +21,15 @@ const stringToNumberArray = (input: string): number[] => {
   const escapedDelimiter = delimiter.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
   const delimitersRegex = new RegExp(`//${escapedDelimiter}`, 'g');
   return input.replace(delimitersRegex, '').split(delimiter).map(Number);
+};
+
+const hasNegativeNumbers = (nums: number[]): number | null => {
+  return nums.find((num) => num < 0) || null;
+};
+
+const validateNumsArray = (nums: number[]): void => {
+  const firstNegative = hasNegativeNumbers(nums);
+  if (firstNegative !== null) {
+    throw new Error(`negative numbers not allowed ${firstNegative}`);
+  }
 };
