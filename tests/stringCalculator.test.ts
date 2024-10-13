@@ -32,4 +32,11 @@ describe('add', () => {
     expect(sumOne).toBe(6);
     expect(sumTwo).toBe(11);
   });
+
+  it('should handle custom delimiter number strings', () => {
+    const sumOne = add('//;1;2;10');
+    const sumTwo = add('//)5)9)1');
+    expect(sumOne).toBe(13);
+    expect(sumTwo).toBe(15);
+  });
 });

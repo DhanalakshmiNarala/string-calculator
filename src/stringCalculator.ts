@@ -1,4 +1,5 @@
 import { sum } from './utils/math';
+import { findDelimiter } from './utils/stringHelpers';
 
 export const add = (str: string) => {
   if (str.length == 0) {
@@ -14,13 +15,9 @@ export const add = (str: string) => {
 };
 
 const stringToNumberArray = (input: string): number[] => {
-  let delimiter = '';
-  if (input.includes(',')) {
-    delimiter = ',';
-  }
+  let delimiter = findDelimiter(input);
 
-  if (input.includes('\n')) {
-    delimiter = '\n';
-  }
-  return input.split(delimiter).map(Number);
+  const escapedDelimiter = delimiter.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  const delimitersRegex = new RegExp(`//${escapedDelimiter}`, 'g');
+  return input.replace(delimitersRegex, '').split(delimiter).map(Number);
 };
