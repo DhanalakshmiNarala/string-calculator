@@ -1,4 +1,5 @@
 import { sum } from '../../src/utils/math';
+
 describe('sum', () => {
   it('should return sum of numbers array', () => {
     const result = sum([1, 2, 3, 5]);
