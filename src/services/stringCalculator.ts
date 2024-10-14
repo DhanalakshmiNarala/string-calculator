@@ -9,14 +9,16 @@ export class StringCalculator {
   }
 
   private stringToNumberArray(input: string): number[] {
-    let delimiter = findDelimiter(input);
+    let delimiters = findDelimiter(input);
+    delimiters = delimiters instanceof Array ? delimiters : [delimiters];
 
-    const escapedDelimiter = delimiter.replace(
-      /[-\/\\^$*+?.()|[\]{}]/g,
-      '\\$&'
-    );
-    const delimitersRegex = new RegExp(`//${escapedDelimiter}`, 'g');
-    return input.replace(delimitersRegex, '').split(delimiter).map(Number);
+    input = input.replace(/^\/\/.*\n/, '');
+
+    delimiters.forEach((delimiter) => {
+      input.replace(delimiter, ' ');
+    });
+
+    return input.split(' ').map(Number);
   }
 
   private validateNumsArray(nums: number[]): void {
