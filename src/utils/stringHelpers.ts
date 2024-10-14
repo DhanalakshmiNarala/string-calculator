@@ -1,7 +1,7 @@
 import { COMMA, NEWLINE } from '../constants/delimiters';
 
 export const findDelimiter = (str: string): string => {
-  const customDelimiter = /^\/\/[^\d]+/;
+  const customDelimiter = /^\/\/[^\d]+\n/;
   if (customDelimiter.test(str)) {
     return str.charAt(2);
   }
