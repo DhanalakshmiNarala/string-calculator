@@ -5,3 +5,10 @@ export const sum = (nums: number[]): number => {
 export const getNegativeNumbers = (nums: number[]): number[] => {
   return nums.filter((num) => num < 0);
 };
+
+export const getNumbersInRange = (
+  nums: number[],
+  maxRange: number
+): number[] => {
+  return nums.filter((num) => num <= maxRange);
+};

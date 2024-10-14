@@ -1,4 +1,4 @@
-import { COMMA, NEWLINE } from '../constants/delimiters';
+import { COMMA, NEWLINE } from '../constants';
 
 export const findDelimiters = (str: string): string[] => {
   let delimiters = findCustomMultipleDelimiters(str);

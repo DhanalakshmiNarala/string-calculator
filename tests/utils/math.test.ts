@@ -1,4 +1,8 @@
-import { getNegativeNumbers, sum } from '../../src/utils/math';
+import {
+  getNegativeNumbers,
+  getNumbersInRange,
+  sum,
+} from '../../src/utils/math';
 
 describe('sum', () => {
   it('should return sum of numbers array', () => {
@@ -17,5 +21,13 @@ describe('sum', () => {
 
     const resultTwo = getNegativeNumbers([-1111, -500, -3, 0]);
     expect(resultTwo).toEqual([-1111, -500, -3]);
+  });
+
+  it('should return numbers which are less than or equal to 1000', () => {
+    const resultOne = getNumbersInRange([1, -5, 3000, 1000], 1000);
+    expect(resultOne).toEqual([1, -5, 1000]);
+
+    const resultTwo = getNumbersInRange([999, 100, 3000, 4000], 1000);
+    expect(resultTwo).toEqual([999, 100]);
   });
 });

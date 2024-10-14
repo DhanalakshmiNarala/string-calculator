@@ -1,10 +1,12 @@
-import { getNegativeNumbers, sum } from '../utils/math';
+import { MAX_RANGE } from '../constants';
+import { getNegativeNumbers, getNumbersInRange, sum } from '../utils/math';
 import { findDelimiters } from '../utils/stringHelpers';
 
 export class StringCalculator {
   public add(str: string): number {
-    const nums = this.stringToNumberArray(str);
-    this.validateNumsArray(nums);
+    let nums = this.stringToNumberArray(str);
+    this.validateNumberArray(nums);
+    nums = getNumbersInRange(nums, MAX_RANGE);
     return sum(nums);
   }
 
@@ -20,7 +22,7 @@ export class StringCalculator {
     return input.split(' ').map(Number);
   }
 
-  private validateNumsArray(nums: number[]): void {
+  private validateNumberArray(nums: number[]): void {
     const negativeNums = getNegativeNumbers(nums);
     if (negativeNums.length) {
       throw new Error(
