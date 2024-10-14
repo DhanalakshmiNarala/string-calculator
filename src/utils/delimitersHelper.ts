@@ -40,3 +40,18 @@ const getCustomMultipleDelimiters = (str: string): string[] => {
 
   return delimiters;
 };
+
+export const removeDelimiterPrefixFromString = (str: string): string => {
+  return str.replace(/^\/\/.*\n/, '');
+};
+
+export const splitDelimiterString = (
+  str: string,
+  delimiters: string[]
+): number[] => {
+  delimiters.forEach((delimiter) => {
+    str = str.split(delimiter).join(' ');
+  });
+
+  return str.split(' ').map(Number);
+};
