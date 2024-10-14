@@ -1,4 +1,4 @@
-import { sum } from '../utils/math';
+import { getNegativeNumbers, sum } from '../utils/math';
 import { findDelimiters } from '../utils/stringHelpers';
 
 export class StringCalculator {
@@ -21,15 +21,11 @@ export class StringCalculator {
   }
 
   private validateNumsArray(nums: number[]): void {
-    const negativeNums = this.getNegativeNumbers(nums);
+    const negativeNums = getNegativeNumbers(nums);
     if (negativeNums.length) {
       throw new Error(
         `negative numbers not allowed ${negativeNums.join(', ')}`
       );
     }
-  }
-
-  private getNegativeNumbers(nums: number[]): number[] {
-    return nums.filter((num) => num < 0);
   }
 }
