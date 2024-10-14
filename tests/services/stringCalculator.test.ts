@@ -37,8 +37,8 @@ describe('add', () => {
   });
 
   it('should handle custom delimiter number strings', () => {
-    const sumOne = calculator.add('//;1;2;10');
-    const sumTwo = calculator.add('//)5)9)1');
+    const sumOne = calculator.add('//;\n1;2;10');
+    const sumTwo = calculator.add('//)\n5)9)1');
     expect(sumOne).toBe(13);
     expect(sumTwo).toBe(15);
   });
@@ -50,5 +50,12 @@ describe('add', () => {
     expect(() => calculator.add('1,9,-10')).toThrow(
       'negative numbers not allowed -10'
     );
+  });
+
+  it('should handle custom multiplied delimiter number strings', () => {
+    const sumOne = calculator.add('//[***]\n1***2***3');
+    const sumTwo = calculator.add('//#####\n5#####9#####1');
+    expect(sumOne).toBe(6);
+    expect(sumTwo).toBe(15);
   });
 });

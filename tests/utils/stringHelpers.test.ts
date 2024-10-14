@@ -21,5 +21,15 @@ describe('String helpers', () => {
       const result = findDelimiter('//$\n1$2\n');
       expect(result).toBe('$');
     });
+
+    it('should return "***" as delimiter', () => {
+      const result = findDelimiter('//[***]\n1***2***3');
+      expect(result).toBe('***');
+    });
+
+    it('should return "$$$$$" as delimiter', () => {
+      const result = findDelimiter('//[$$$$$]\n1$$$$$2$$$$$3');
+      expect(result).toBe('$$$$$');
+    });
   });
 });
