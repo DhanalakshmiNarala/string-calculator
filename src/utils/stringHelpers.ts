@@ -1,8 +1,14 @@
 import { COMMA, NEWLINE } from '../constants/delimiters';
 
-export const findDelimiter = (str: string): string => {
+export const findDelimiter = (str: string): string | string[] => {
+  const multipleDelimiters = /^\/\/\[(\D+)\]\[(\D+)\]\n/;
+  let match = str.match(multipleDelimiters);
+  if (match != null) {
+    return [match[1], match[2]];
+  }
+
   const customMultipleDelimiter = /^\/\/\[(\D+)\]\n/; // Ex: //[***]\n
-  const match = str.match(customMultipleDelimiter);
+  match = str.match(customMultipleDelimiter);
   if (match != null) {
     return match[1];
   }

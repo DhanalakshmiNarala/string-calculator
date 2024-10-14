@@ -31,5 +31,10 @@ describe('String helpers', () => {
       const result = findDelimiter('//[$$$$$]\n1$$$$$2$$$$$3');
       expect(result).toBe('$$$$$');
     });
+
+    it('should return "*" and "%" as delimiters', () => {
+      const result = findDelimiter('//[*][%]\n1*2%3');
+      expect(result).toEqual(['*', '%']);
+    });
   });
 });
