@@ -3,7 +3,7 @@ import { StringCalculator } from '../../src/services/stringCalculator';
 describe('add', () => {
   const calculator = new StringCalculator();
 
-  it.only('should handle empty string', () => {
+  it('should handle empty string', () => {
     const result = calculator.add('');
     expect(result).toBe(0);
   });
@@ -54,7 +54,7 @@ describe('add', () => {
 
   it('should handle custom multiplied delimiter numbers string', () => {
     const sumOne = calculator.add('//[***]\n1***2***3');
-    const sumTwo = calculator.add('//#####\n5#####9#####1');
+    const sumTwo = calculator.add('//[#####]\n5#####9#####1');
     expect(sumOne).toBe(6);
     expect(sumTwo).toBe(15);
   });

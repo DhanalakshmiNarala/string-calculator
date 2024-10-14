@@ -10,12 +10,11 @@ export class StringCalculator {
 
   private stringToNumberArray(input: string): number[] {
     let delimiters = findDelimiters(input);
-    delimiters = delimiters instanceof Array ? delimiters : [delimiters];
 
     input = input.replace(/^\/\/.*\n/, '');
 
     delimiters.forEach((delimiter) => {
-      input.replace(delimiter, ' ');
+      input = input.split(delimiter).join(' ');
     });
 
     return input.split(' ').map(Number);
