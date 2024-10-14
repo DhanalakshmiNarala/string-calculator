@@ -1,32 +1,31 @@
-import { sum } from '../utils/math';
-import { findDelimiter } from '../utils/stringHelpers';
+import { MAX_RANGE } from '../constants';
+import { getNegativeNumbers, getNumbersInRange, sum } from '../utils/math';
+import {
+  getStringDelimiters,
+  removeDelimiterPrefixFromString,
+  splitDelimiterString,
+} from '../utils/delimitersHelper';
 
 export class StringCalculator {
-  public add(str: string): number {
-    const nums = this.stringToNumberArray(str);
-    this.validateNumsArray(nums);
+  public add(input: string): number {
+    let nums = this.stringToNumberArray(input);
+    this.validateNumberArray(nums);
+    nums = getNumbersInRange(nums, MAX_RANGE);
     return sum(nums);
   }
 
   private stringToNumberArray(input: string): number[] {
-    let delimiter = findDelimiter(input);
-
-    const escapedDelimiter = delimiter.replace(
-      /[-\/\\^$*+?.()|[\]{}]/g,
-      '\\$&'
-    );
-    const delimitersRegex = new RegExp(`//${escapedDelimiter}`, 'g');
-    return input.replace(delimitersRegex, '').split(delimiter).map(Number);
+    let delimiters = getStringDelimiters(input);
+    input = removeDelimiterPrefixFromString(input);
+    return splitDelimiterString(input, delimiters);
   }
 
-  private validateNumsArray(nums: number[]): void {
-    const firstNegative = this.hasNegativeNumbers(nums);
-    if (firstNegative !== null) {
-      throw new Error(`negative numbers not allowed ${firstNegative}`);
+  private validateNumberArray(nums: number[]): void {
+    const negativeNums = getNegativeNumbers(nums);
+    if (negativeNums.length) {
+      throw new Error(
+        `negative numbers not allowed ${negativeNums.join(', ')}`
+      );
     }
-  }
-
-  private hasNegativeNumbers(nums: number[]): number | null {
-    return nums.find((num) => num < 0) || null;
   }
 }
