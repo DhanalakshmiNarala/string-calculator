@@ -1,6 +1,6 @@
 import { MAX_RANGE } from '../constants';
 import { getNegativeNumbers, getNumbersInRange, sum } from '../utils/math';
-import { findDelimiters } from '../utils/stringHelpers';
+import { getStringDelimiters } from '../utils/delimitersHelper';
 
 export class StringCalculator {
   public add(input: string): number {
@@ -11,7 +11,7 @@ export class StringCalculator {
   }
 
   private stringToNumberArray(input: string): number[] {
-    let delimiters = findDelimiters(input);
+    let delimiters = getStringDelimiters(input);
     input = this.removeCustomDelimiterPrefix(input);
     return this.splitDelimiterString(input, delimiters);
   }
