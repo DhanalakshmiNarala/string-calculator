@@ -3,8 +3,8 @@ import { getNegativeNumbers, getNumbersInRange, sum } from '../utils/math';
 import { findDelimiters } from '../utils/stringHelpers';
 
 export class StringCalculator {
-  public add(str: string): number {
-    let nums = this.stringToNumberArray(str);
+  public add(input: string): number {
+    let nums = this.stringToNumberArray(input);
     this.validateNumberArray(nums);
     nums = getNumbersInRange(nums, MAX_RANGE);
     return sum(nums);
@@ -12,9 +12,15 @@ export class StringCalculator {
 
   private stringToNumberArray(input: string): number[] {
     let delimiters = findDelimiters(input);
+    input = this.removeCustomDelimiterPrefix(input);
+    return this.splitDelimiterString(input, delimiters);
+  }
 
-    input = input.replace(/^\/\/.*\n/, '');
+  private removeCustomDelimiterPrefix(input: string): string {
+    return input.replace(/^\/\/.*\n/, '');
+  }
 
+  private splitDelimiterString(input: string, delimiters: string[]) {
     delimiters.forEach((delimiter) => {
       input = input.split(delimiter).join(' ');
     });
