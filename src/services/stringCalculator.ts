@@ -1,5 +1,5 @@
 import { sum } from '../utils/math';
-import { findDelimiter } from '../utils/stringHelpers';
+import { findDelimiters } from '../utils/stringHelpers';
 
 export class StringCalculator {
   public add(str: string): number {
@@ -9,7 +9,7 @@ export class StringCalculator {
   }
 
   private stringToNumberArray(input: string): number[] {
-    let delimiters = findDelimiter(input);
+    let delimiters = findDelimiters(input);
     delimiters = delimiters instanceof Array ? delimiters : [delimiters];
 
     input = input.replace(/^\/\/.*\n/, '');
