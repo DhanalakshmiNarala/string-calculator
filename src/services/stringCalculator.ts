@@ -21,13 +21,15 @@ export class StringCalculator {
   }
 
   private validateNumsArray(nums: number[]): void {
-    const firstNegative = this.hasNegativeNumbers(nums);
-    if (firstNegative !== null) {
-      throw new Error(`negative numbers not allowed ${firstNegative}`);
+    const negativeNums = this.getNegativeNumbers(nums);
+    if (negativeNums.length) {
+      throw new Error(
+        `negative numbers not allowed ${negativeNums.join(', ')}`
+      );
     }
   }
 
-  private hasNegativeNumbers(nums: number[]): number | null {
-    return nums.find((num) => num < 0) || null;
+  private getNegativeNumbers(nums: number[]): number[] {
+    return nums.filter((num) => num < 0);
   }
 }

@@ -47,8 +47,8 @@ describe('add', () => {
     expect(() => calculator.add('1,-5,10')).toThrow(
       'negative numbers not allowed -5'
     );
-    expect(() => calculator.add('1,9,-10')).toThrow(
-      'negative numbers not allowed -10'
+    expect(() => calculator.add('1,9,-10,11,-30')).toThrow(
+      'negative numbers not allowed -10, -30'
     );
   });
 
