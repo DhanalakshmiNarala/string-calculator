@@ -1,5 +1,10 @@
-import { MAX_RANGE } from '../constants';
-import { getNegativeNumbers, getNumbersInRange, sum } from '../utils/math';
+import { ADD, MAX_RANGE, PRODUCT } from '../constants';
+import {
+  getNegativeNumbers,
+  getNumbersInRange,
+  productUsingSum,
+  sum,
+} from '../utils/math';
 import {
   getStringDelimiters,
   removeDelimiterPrefixFromString,
@@ -8,16 +13,33 @@ import {
 
 export class StringCalculator {
   public add(input: string): number {
-    let nums = this.stringToNumberArray(input);
-    this.validateNumberArray(nums);
-    nums = getNumbersInRange(nums, MAX_RANGE);
+    const delimiters = getStringDelimiters(input);
+    const nums = this.stringToNumberArray(input, delimiters);
+
+    const action = this.getActionBasedOnDelimiter(delimiters);
+    if (action == PRODUCT) {
+      return productUsingSum(nums);
+    }
+
     return sum(nums);
   }
 
-  private stringToNumberArray(input: string): number[] {
-    let delimiters = getStringDelimiters(input);
+  private validateInput(nums: number[]): number[] {
+    this.validateNumberArray(nums);
+    return getNumbersInRange(nums, MAX_RANGE);
+  }
+
+  private getActionBasedOnDelimiter(delimiters: string[]): string {
+    if (delimiters.includes('*')) {
+      return PRODUCT;
+    }
+    return ADD;
+  }
+
+  private stringToNumberArray(input: string, delimiters: string[]): number[] {
     input = removeDelimiterPrefixFromString(input);
-    return splitDelimiterString(input, delimiters);
+    const nums = splitDelimiterString(input, delimiters);
+    return this.validateInput(nums);
   }
 
   private validateNumberArray(nums: number[]): void {
