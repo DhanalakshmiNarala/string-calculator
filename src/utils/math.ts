@@ -3,17 +3,13 @@ export const sum = (nums: number[]): number => {
 };
 
 export const productUsingSum = (nums: number[]): number => {
-  if (nums.length == 0) {
-    return 0;
-  }
-
-  if (nums.length == 1) {
-    return nums[0];
+  if (nums.length <= 1) {
+    return nums[0] || 0;
   }
 
   let result = nums[0];
   for (let i = 1; i < nums.length; i++) {
-    result += productOfTwo(result, nums[i + 1]);
+    result = productOfTwo(result, nums[i]);
   }
   return result;
 };
@@ -23,10 +19,10 @@ export const productOfTwo = (numOne: number, numTwo: number): number => {
   const other = numOne == min ? numTwo : numOne;
 
   let result = 0;
-  for (let i = 0; i < min; i++) {
+  for (let i = 0; i < Math.abs(min); i++) {
     result += other;
   }
-  return result;
+  return min < 0 ? -result : result;
 };
 
 export const getNegativeNumbers = (nums: number[]): number[] => {

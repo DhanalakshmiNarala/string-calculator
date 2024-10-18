@@ -46,4 +46,31 @@ describe('math', () => {
       expect(product).toBe(1000);
     });
   });
+
+  describe('productUsingSum', () => {
+    it('should give 0 for empty array', () => {
+      const product = productUsingSum([]);
+      expect(product).toBe(0);
+    });
+
+    it('should give 1000 for [1000]', () => {
+      const product = productUsingSum([1000]);
+      expect(product).toBe(1000);
+    });
+
+    it('should give 10 for [2, 5]', () => {
+      const product = productUsingSum([2, 5]);
+      expect(product).toBe(10);
+    });
+
+    it('should give 100 for [2, 5, 10]', () => {
+      const product = productUsingSum([2, 5, 10]);
+      expect(product).toBe(100);
+    });
+
+    it('should give -100 for [2, 5, -10]', () => {
+      const product = productUsingSum([2, 5, -10]);
+      expect(product).toBe(-100);
+    });
+  });
 });
